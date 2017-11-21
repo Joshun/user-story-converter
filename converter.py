@@ -14,6 +14,7 @@ document = Document()
 document.add_heading("User Stories")
 
 table = document.add_table(rows=1, cols=3)
+table.style = "Table Grid"
 header_rows = table.rows[0].cells
 header_rows[0].text = "#"
 header_rows[1].text = "Story"
