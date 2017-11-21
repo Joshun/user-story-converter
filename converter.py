@@ -63,6 +63,8 @@ with open(infile_name) as f:
 
 if infile_name[-4:] == ".csv":
     outfile_name = infile_name[:-4] + ".docx"
+else:
+    outfile_name = infile_name + ".docx"
 
 document.save(outfile_name)
 print("Written to " + outfile_name)
