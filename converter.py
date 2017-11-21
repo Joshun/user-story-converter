@@ -2,6 +2,13 @@ import sys
 import csv
 from docx import Document
 from docx.shared import Inches
+import argparse
+
+parser = argparse.ArgumentParser(description="converter.py")
+parser.add_argument("csv_filename")
+parser.add_argument("--generate-numbering", help="generate numbering instead of using csv numbering", action="store_true")
+
+args = parser.parse_args()
 
 document = Document()
 document.add_heading("User Stories")
@@ -12,20 +19,22 @@ header_rows[0].text = "#"
 header_rows[1].text = "Story"
 header_rows[2].text = "Acceptance criteria"
 
-def show_help():
-    print("Usage: converter.py <stories.csv>")
+# def show_help():
+#     print("Usage: converter.py <stories.csv>")
         
 
-if "-h" in sys.argv:
-    show_help()
-    sys.exit(0)
+# if "-h" in sys.argv:
+#     show_help()
+#     sys.exit(0)
 
-elif len(sys.argv) != 2:
-    show_help()
-    sys.exit(1)
+# elif len(sys.argv) != 2:
+#     show_help()
+#     sys.exit(1)
 
 
-infile_name = sys.argv[1]
+# infile_name = sys.argv[1]
+infile_name = args.csv_filename
+generate_numbering = args.generate_numbering
 
 with open(infile_name) as f:
     stories_reader = csv.reader(f)
@@ -39,7 +48,7 @@ with open(infile_name) as f:
         acc_criteria = add_info.split("\n")
 
         row_cells = table.add_row().cells
-        row_cells[0].text = str(num)
+        row_cells[0].text = str(num) if not generate_numbering else str(i)
         row_cells[1].text = str(story)
         # row_cells[2].text = add_info
         for a in acc_criteria:
