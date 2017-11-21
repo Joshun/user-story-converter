@@ -13,12 +13,13 @@ args = parser.parse_args()
 document = Document()
 document.add_heading("User Stories")
 
-table = document.add_table(rows=1, cols=3)
+table = document.add_table(rows=1, cols=4)
 table.style = "Table Grid"
 header_rows = table.rows[0].cells
 header_rows[0].text = "#"
 header_rows[1].text = "Story"
 header_rows[2].text = "Acceptance criteria"
+header_rows[3].text = "Pts"
 
 # def show_help():
 #     print("Usage: converter.py <stories.csv>")
@@ -57,6 +58,7 @@ with open(infile_name) as f:
                 continue
             # pg.add_run(a)
             pg = row_cells[2].add_paragraph(a, style="List Bullet")
+        row_cells[3].text = str(points)
 
 
 if infile_name[-4:] == ".csv":
