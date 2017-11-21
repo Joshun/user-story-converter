@@ -48,7 +48,7 @@ with open(infile_name) as f:
         acc_criteria = add_info.split("\n")
 
         row_cells = table.add_row().cells
-        row_cells[0].text = str(num) if not generate_numbering else str(i)
+        row_cells[0].text = str(num[len("STORY#"):]) if not generate_numbering else str(i)
         row_cells[1].text = str(story)
         # row_cells[2].text = add_info
         for a in acc_criteria:
