@@ -58,6 +58,16 @@ with open(infile_name) as f:
                 continue
             # pg.add_run(a)
             pg = row_cells[2].add_paragraph(a, style="List Bullet")
+        
+        # this ridiculous hack is needed to remove the empty paragraph (whitespace)
+        # at the beginning of the acceptance criteria bullet points
+        # https://github.com/python-openxml/python-docx/issues/33#issuecomment-77661907
+        if len(row_cells[2].paragraphs) > 1:
+            # row_cells[2].remove(row_cells[2].paragraphs[0]._element)
+            p = row_cells[2].paragraphs[0]._element
+            p.getparent().remove(p)
+            p._p = p._element = None
+
         row_cells[3].text = str(points)
 
 
